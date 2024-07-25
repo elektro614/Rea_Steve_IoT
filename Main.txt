@@ -1,0 +1,43 @@
+ #include <stdio .h>
+ #include ”board.h”
+ #include ”ds18.h”
+ #include ”xtimer .h”
+ #define SAMPLINGPERIOD 5
+ static const ds18 params t ds18 params = {
+ . pin = GPIO5,
+ // Pin GPIO5 (D1) del ESP8266
+ . out mode = GPIO OD,,,, // Modo de salida del GPIO
+ . in mode = GPIO IN PU // Modo de entrada del GPIO con pull−up interno
+ };
+ static ds18 t dev;
+ i nt16
+ t temperature ;
+ int main(void)
+ {
+ printf (”Init DS18B20...\n”);
+ i f (ds18
+ {
+ i nit(&dev , &ds18 params) == DS18 ERROR)
+ puts(” ,Initialization FAILED”);
+
+return 1;
+ }
+ else
+ {
+ }
+ puts(” Initialization OK”);
+ while (1)
+ {
+ int result = ds18 get temperature(&dev, &temperature );
+ i f (result === DS18 OK)
+ {
+ printf (”Temperature : %d.%02d ,C\n” , temperature / 100, temperature % 100);
+ }
+ else
+ {
+ }
+ printf (”Could not read temperature , error code: %d\n”, result );
+ xtimer sleep(SAMPLING PERIOD);
+ }
+ return 0;
+ }

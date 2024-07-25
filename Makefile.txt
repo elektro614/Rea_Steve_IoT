@@ -1,0 +1,21 @@
+Makefile
+# name of your application
+ APPLICATION = ds18
+ # If no BOARD is found in the environment , use this default :
+ BOARD ?= esp8266−esp−12x
+ # This has to be the absolute path to the RIOT base directory:
+ RIOTBASE ?= $(CURDIR)/../..
+ # Include packages that pull up and auto−init the link layer .
+ #check if needed
+USEMODULE += xtimer
+ USEMODULE += ds18
+ # Establecer la frecuencia del procesador (si es necesario)
+ CPUFREQUENCY = 80000000
+ # Configuraci n para el tama o del stack (opcional)
+ CFLAGS += −DTHREADSTACKSIZEMAIN=1024
+ # Opcional: incluir caracter sticas de depuraci n
+ CFLAGS += −DDEBUGASSERTVERBOSE
+ # Incluir soporte para la librer a DS18B20
+ USEPKG += ds18
+ # anEXTERNAL BOARDDIRS += $(RIOTBASE)/tests/build system/external board
+ i nclude $(RIOTBASE)/Makefile . include

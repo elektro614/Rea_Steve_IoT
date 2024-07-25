@@ -1,0 +1,40 @@
+makefile
+# name of your application
+ APPLICATION = dstime
+# If no BOARD is found in the environment , use this default :
+ BOARD ?= native
+ # This has to be the absolute path to the RIOT base directory:
+ RIOTBASE ?= $(CURDIR)/../..
+ # Include packages that pull up and auto−init the link layer .
+ # NOTE: 6LoWPAN will be included if IEEE802.15.4 devices are present
+ USEMODULE += netdev
+ default
+ USEMODULE += auto
+ i nit gnrc netif
+ # Specify the mandatory networking modules for IPv6 and UDP
+ USEMODULE += gnrc sock udp
+ USEMODULE += gnrc ipv6
+ default
+ # Include MQTT−SN
+ USEMODULE += emcute
+ # Add also the shell , some shell commands
+ USEMODULE += shell
+ USEMODULE += shell cmds default
+ USEMODULE += ps
+ # For testing we also include the ping6 command and some stats
+ USEMODULE += gnrc icmpv6 echo
+ # For measuring time
+ USEMODULE += xtimer
+ USEMODULE += ds18
+ # Establecer la frecuencia del procesador (si es necesario)
+ #CPUFREQUENCY = 80000000
+ # Configuraci n para el tama o del stack (opcional)
+ #CFLAGS += −DTHREADSTACKSIZEMAIN=1024
+ # Opcional: incluir caracter sticas de depuraci n
+ CFLAGS += −DDEBUGASSERTVERBOSE
+ # Incluir soporte para la librer a DS18B20
+ USEPKG += ds18
+ # Comment this out to disable code in RIOT that does safety checking
+ # which is not needed in a production environment but helps in the
+ # development process :
+ DEVELHELP ?= 1
