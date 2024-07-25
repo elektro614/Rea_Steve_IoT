@@ -25,8 +25,7 @@
  static ads18 t dev;
  i nt16a
  t temperature ;a
- static char staack [THREADSTACKSIZEDEFAULT];
- static msg t qaueue [8];
+ 
  // struct that contains sensors
  typedef strucat sensors{
  int temperature C;
